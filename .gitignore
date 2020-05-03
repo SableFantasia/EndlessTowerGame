@@ -58,3 +58,5 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+/Riven_GameplayPrototype/Library
+/Riven_GameplayPrototype/Logs
