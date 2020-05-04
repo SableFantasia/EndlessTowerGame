@@ -8,8 +8,10 @@ public class PlayerStats : MonoBehaviour
     float powerfulAttack;
     public float mainDefence = 0.0f;
     float health = 10.0f;
-    float healthRegenerationRate = 0.1f;
+    float maxHealth = 10.0f;
+    float healthRegenerationRate = 1f;
     float stamina;
+    float staminaRegen;
     float mana;
     float speed;
     float attackSpeed;
@@ -22,9 +24,37 @@ public class PlayerStats : MonoBehaviour
     public Armour gloves;
     public Armour necklace;
 
-    // Start is called before the first frame update
     float GetDefence()
     {
         return helmet.getFireResist() + mainDefence;
+    }
+
+    void Start()
+    {
+        health = maxHealth;
+    }
+
+    void Update()
+    {
+        if (health >= maxHealth)
+        {
+            RegenerateHealth(healthRegenerationRate);
+        }
+    }
+
+    void TakeDamage(float Damage)
+    {
+        health -= Damage;
+    }
+
+    void HealDamage(float Damage)
+    {
+        health += Damage;
+    }
+
+    IEnumerator RegenerateHealth(float rate)
+    {
+        yield return new WaitForSeconds(rate);
+        health += 0.1f;
     }
 }
