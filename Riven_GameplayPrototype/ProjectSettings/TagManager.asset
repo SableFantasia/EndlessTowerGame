@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Spawner
   - Enemy
+  - Terrain
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Bullet
   - Projectile
   - Enemy
-  - 
+  - Terrain
   - 
   - 
   - 
