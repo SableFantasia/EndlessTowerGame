@@ -4,31 +4,34 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
+    public UIScript ui;
+
     [HideInInspector]
     public int Strength; //increases the hit of the attack and Health
 
-    float attackModifier = 1.0f;
-    float weaponAttack = 1.0f;
-    float weaponSpecialAttack = 1.5f;
+    public float attackModifier = 1.0f;
+    public float weaponAttack = 1.0f;
+    public float weaponSpecialAttack = 1.5f;
     float physicalAttack;
     float specialAttack;
     float criticalAttack;
 
-    float baseHealth = 10.0f;
+    public float baseHealth = 10.0f;
     float health;
-    float maxHealth;
+    public float maxHealth;
     float initialHealthRegenerationRate = 1f;
     float healthRegenerationRate = 1f;
-    float healthModifier;
-    float healthRegenModifier;
+    public float healthModifier;
+    public float healthRegenModifier;
 
     [HideInInspector]
     public int Endurance; //increases speed recovery and defence
 
     float mainDefence = 1.0f;
     float defence;
-    float totalDefence; // basically defence of all the armour pieces.
-    float armourModifier;
+    [HideInInspector]
+    public float totalDefence; // basically defence of all the armour pieces.
+    public float armourModifier;
     float damageReduction;
 
     float damage;
@@ -41,21 +44,21 @@ public class PlayerStats : MonoBehaviour
     float baseAttackSpeed = 1.0f;
     float attackSpeed;
     float attackSpeedDelay;
-    float attackSpeedModifier;
+    public float attackSpeedModifier;
     float stamina;
     float staminaRegen;
-    float baseMovementSpeed;
+    public float baseMovementSpeed;
     float movementSpeed;
-    float movementSpeedModifier;
+    public float movementSpeedModifier;
 
     [HideInInspector]
     public int Chance; //Increases Critical Rate and evasion to attacks
 
     float criticalChance = 0.01f;
-    float criticalModifier;
+    public float criticalModifier;
     float dodgingChance = 0.01f;
     float evasion;
-    float evasionModifier;
+    public float evasionModifier;
 
     [HideInInspector]
     public int Intelligence; //increases special points and elemental attack
@@ -63,14 +66,16 @@ public class PlayerStats : MonoBehaviour
     float elementalAttack = 1.0f;
     int basespecialPoints = 10;
     int specialPoints = 10;
-    float specialPointsModifier;
+    public float specialPointsModifier;
 
     [HideInInspector]
     public int Control; //number of active placement type abilities you can have at one time and special recovery speed
 
-    float abilityModifier = 1.0f;
+    public float abilityModifier = 1.0f;
     int numberOfActiveAbilities;
     float specialRecoverySpeed;
+
+    public int crystalsAvaliable = 0;
 
     public Armour helmet;
     public Armour chestplate;
@@ -81,7 +86,68 @@ public class PlayerStats : MonoBehaviour
 
     float GetDefence()
     {
-        return helmet.getFireResist() + mainDefence;
+        float[] defenceStats = new float[6];
+        float sum = 0;
+        if (helmet == null)
+        {
+            defenceStats[0] = 0;
+        }
+        else
+        {
+            defenceStats[0] = helmet.TotalDefence();
+        }
+        if (chestplate == null)
+        {
+            defenceStats[1] = 0;
+        }
+        else
+        {
+            defenceStats[1] = chestplate.TotalDefence();
+        }
+        if (platelegs == null)
+        {
+            defenceStats[2] = 0;
+        }
+        else
+        {
+            defenceStats[2] = platelegs.TotalDefence();
+        }
+        if (boots == null)
+        {
+            defenceStats[3] = 0;
+        }
+        else
+        {
+            defenceStats[3] = boots.TotalDefence();
+        }
+        if (gloves == null)
+        {
+            defenceStats[4] = 0;
+        }
+        else
+        {
+            defenceStats[4] = gloves.TotalDefence();
+        }
+        if (necklace == null)
+        {
+            defenceStats[5] = 0;
+        }
+        else
+        {
+            defenceStats[5] = necklace.TotalDefence();
+        }
+
+        for (int i = 0; i < defenceStats.Length; i++)
+        {
+            sum += defenceStats[i];
+        }
+
+        return sum + mainDefence;
+    }
+
+    void Awake()
+    {
+        health = maxHealth;
     }
 
     void Start()
@@ -105,9 +171,11 @@ public class PlayerStats : MonoBehaviour
         evasion = Chance * evasionModifier;
 
         criticalChance = Chance * criticalModifier;
+    }
 
-        health = maxHealth;
-
+    public void ChangeInLevel()
+    {
+        ui.UpdateStats();
     }
 
     void Update()

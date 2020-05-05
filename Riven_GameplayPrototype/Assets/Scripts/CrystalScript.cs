@@ -7,13 +7,15 @@ public class CrystalScript : MonoBehaviour
     public enum CrystalTypes { Strength, Endurance, Agility, Chance, Intelligence, Control }
     public CrystalTypes crystalTypes;
 
+    public string Description;
+
     MeshRenderer mesh;
 
     void Start()
     {
         mesh = GetComponent<MeshRenderer>();
 
-
+        
 
         switch (crystalTypes)
         {
@@ -70,6 +72,7 @@ public class CrystalScript : MonoBehaviour
                     Debug.Log("Control Level: " + stats.Control);
                     break;
             }
+            stats.ChangeInLevel();
             Destroy(this.gameObject);
         }
         
