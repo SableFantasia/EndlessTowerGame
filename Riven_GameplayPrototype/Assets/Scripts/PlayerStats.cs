@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    int Strength; //increases the hit of the attack and Health
+    [HideInInspector]
+    public int Strength; //increases the hit of the attack and Health
 
     float attackModifier = 1.0f;
     float weaponAttack = 1.0f;
@@ -21,7 +22,8 @@ public class PlayerStats : MonoBehaviour
     float healthModifier;
     float healthRegenModifier;
 
-    int Endurance; //increases speed recovery and defence
+    [HideInInspector]
+    public int Endurance; //increases speed recovery and defence
 
     float mainDefence = 1.0f;
     float defence;
@@ -33,7 +35,8 @@ public class PlayerStats : MonoBehaviour
 
     float recoverySpeed;
 
-    int Agility; //Increases Attack Speed and Movement Speed
+    [HideInInspector]
+    public int Agility; //Increases Attack Speed and Movement Speed
 
     float baseAttackSpeed = 1.0f;
     float attackSpeed;
@@ -45,7 +48,8 @@ public class PlayerStats : MonoBehaviour
     float movementSpeed;
     float movementSpeedModifier;
 
-    int Chance; //Increases Critical Rate and evasion to attacks
+    [HideInInspector]
+    public int Chance; //Increases Critical Rate and evasion to attacks
 
     float criticalChance = 0.01f;
     float criticalModifier;
@@ -53,14 +57,16 @@ public class PlayerStats : MonoBehaviour
     float evasion;
     float evasionModifier;
 
-    int Intelligence; //increases special points and elemental attack
+    [HideInInspector]
+    public int Intelligence; //increases special points and elemental attack
 
     float elementalAttack = 1.0f;
     int basespecialPoints = 10;
     int specialPoints = 10;
     float specialPointsModifier;
 
-    int Control; //number of active placement type abilities you can have at one time and special recovery speed
+    [HideInInspector]
+    public int Control; //number of active placement type abilities you can have at one time and special recovery speed
 
     float abilityModifier = 1.0f;
     int numberOfActiveAbilities;
