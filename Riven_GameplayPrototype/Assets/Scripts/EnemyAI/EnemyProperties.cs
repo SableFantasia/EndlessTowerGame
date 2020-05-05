@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 [CreateAssetMenu(fileName = "New Enemy", menuName = "Enemy")]
-public class enemyProperties : ScriptableObject
+public class EnemyProperties : ScriptableObject
 {
     private floorManager floorProperties;
     public projectileBehaviorTypes.projectileBehavior[] enemyBehavior;
@@ -16,11 +17,13 @@ public class enemyProperties : ScriptableObject
     public DamageType elementalType;
     public IsAttacking isAttacking;
     public CheckState checkState;
-    public string enemyName;
+    //public string enemyName;
+    public new string name;
     public string description;
     public float damage;
-    public float health;
+    private float health;
     public float maxHealth;
+    public float score;
     public float projectileInterval;
     public float movementSpeed;
     public float damageScaleModifier;
@@ -29,25 +32,50 @@ public class enemyProperties : ScriptableObject
     public float stoppingDistance;
     public float roamDistance_Min;
     public float roamDistance_Max;
+    private Image healthBar;
 
-    public GameObject thisEnemy;
-
+    GameObject thisEnemy;
     Transform target;
     NavMeshAgent agentController;
     Vector3 startingPosition;
     Vector3 roamPosition;
 
-    public void InitializeProperties ()
+    public EnemyProperties(GameObject _thisObject, Vector3 _setStartingPosition)
     {
-        
-        agentController = thisEnemy.GetComponent<NavMeshAgent>();
-        startingPosition = thisEnemy.transform.position;
+        //SetGameObjectOfSelf(_thisObject);
+        InitializeProperties(_thisObject, _setStartingPosition);
+        //SetStartingPosition(_setStartingPosition);
+    }
+
+    public void InitializeProperties (GameObject _thisObject, Vector3 _setStartingPosition)
+    {
+        SetGameObjectOfSelf(_thisObject);
+
+        startingPosition = _setStartingPosition;
+        thisEnemy.gameObject.transform.position = _setStartingPosition;
+
+        if (!(agentController = thisEnemy.GetComponent<NavMeshAgent>()))
+        {
+            Debug.LogWarningFormat("Found no {0} attached to {1}", typeof(NavMeshAgent).Name, thisEnemy.name);
+        }
+        else
+        {
+            agentController.speed = movementSpeed;
+            agentController.stoppingDistance = stoppingDistance;
+        }
+
+            startingPosition = thisEnemy.transform.position;
         GetRoamingPosition();
         floorProperties = GameObject.Find("GameManager").GetComponent<floorManager>();
         target = PlayerManager.instance.player.transform;
 
-        agentController.stoppingDistance = stoppingDistance;
-        agentController.speed = movementSpeed;
+        InitializeGraphics();
+    }
+
+    private void InitializeGraphics()
+    {
+        health = maxHealth;
+        healthBar = thisEnemy.GetComponentInChildren<Canvas>().GetComponentInChildren<Image>();
     }
 
     public void SetGameObjectOfSelf (GameObject thisObject)
@@ -57,13 +85,7 @@ public class enemyProperties : ScriptableObject
 
     public void GetRoamingPosition()
     {
-
         roamPosition = GetRandomDir();
-        //if you need the vector to have a specific length:
-        //direction = direction.normalized * desiredLength;
-        //roamPosition = startingPosition + GetRandomDir() * Random.Range(roamDistance_Min, roamDistance_Max);
-        //roamPosition.x = testVector.x;
-        //roamPosition.z = testVector.y;
     }
 
     public bool CheckRoamPosition()
@@ -116,5 +138,20 @@ public class enemyProperties : ScriptableObject
         thisEnemy.transform.rotation = Quaternion.Slerp(thisEnemy.transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
+    public void DoDamage(float _damage)
+    {
+        health -= _damage;
+        healthBar.fillAmount = health / maxHealth;
+    }
     
+    public bool IsDead ()
+    {
+        if (health <= 0)
+        {
+            GameObject.Destroy(thisEnemy);
+            return true;
+        }
+        else return false;
+    }
+
 }
