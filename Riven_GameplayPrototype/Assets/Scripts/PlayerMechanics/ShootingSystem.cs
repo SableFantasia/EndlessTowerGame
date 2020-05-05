@@ -22,6 +22,10 @@ public class ShootingSystem : MonoBehaviour {
 
     public float bulletForce;
 
+    public LayerMask layerMask;
+
+    public float shootingHeight = 0.25f;
+
     // Use this for initialization
     void Start ()
     {
@@ -69,7 +73,8 @@ public class ShootingSystem : MonoBehaviour {
         fireTimer = Time.time + 1f / fireRate;
         GameObject bullet = Instantiate(projectile, firePoint.position, firePoint.rotation);
         Rigidbody bulletRB = bullet.GetComponent<Rigidbody>();
-        bulletRB.AddForce(firePoint.forward * bulletForce, ForceMode.Impulse);
+
+        bulletRB.AddForce((mouseCursor.transform.position - firePoint.transform.position).normalized * bulletForce, ForceMode.Impulse);
     }
 
 
@@ -80,9 +85,11 @@ public class ShootingSystem : MonoBehaviour {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
             {
-                mouseCursor.transform.position = hit.point;
+                mouseCursor.transform.position = new Vector3 (hit.point.x, hit.point.y + shootingHeight, hit.point.z);
+
+                Debug.Log(hit.collider.gameObject.name);
             }
 
             
