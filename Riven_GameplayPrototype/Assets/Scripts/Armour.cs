@@ -13,6 +13,11 @@ public class Armour : MonoBehaviour
 
     string armourType;
 
+    void Start()
+    {
+        SetProperties(1.0f, 1.0f, "Helm");
+    }
+
     public void SetProperties(float ElementalMod, float LightDarkMod, string setArmourType)
     {
         FireEleResist = ElementalMod;
@@ -28,6 +33,31 @@ public class Armour : MonoBehaviour
     public float getFireResist()
     {
         return FireEleResist;
+    }
+
+    public float getEarthResist()
+    {
+        return EarthEleResist;
+    }
+
+    public float getWaterResist()
+    {
+        return WaterEleResist;
+    }
+
+    public float getAirResist()
+    {
+        return AirEleResist;
+    }
+
+    public float getDarkResist()
+    {
+        return DarkEleResist;
+    }
+
+    public float getLightResist()
+    {
+        return LightEleResist;
     }
 
     public string getArmourPiece()
