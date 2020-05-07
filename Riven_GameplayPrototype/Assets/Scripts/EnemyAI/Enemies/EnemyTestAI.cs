@@ -24,14 +24,14 @@ public class EnemyTestAI : MonoBehaviour
         //properties.InitializeProperties(gameObject, enemyTransform.position);
     }
 
-    public void InitializeEnemy(EnemyProperties _Properties, Vector3 _setPosition)
+    public void InitializeEnemy(EnemyProperties _Properties, Vector3 _setPosition, SpawnState _setSpawnState, int _setIdentity)
     {
         enemyType = gameObject.GetComponent<EnemyType>();
 
 
         properties = ScriptableObject.Instantiate<EnemyProperties>(_Properties);
         properties.SetGameObjectOfSelf(gameObject);
-        properties.InitializeProperties(gameObject, gameObject.transform.position);
+        properties.InitializeProperties(gameObject, gameObject.transform.position, _setSpawnState, _setIdentity);
 
         enemyType.properties = properties;
     }
@@ -47,17 +47,6 @@ public class EnemyTestAI : MonoBehaviour
         else
         {
             properties.MoveToRoam();
-        }
-
-        properties.IsDead();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            OnEnemyHit(5f);
-        }
-
-        if (properties.IsDead())
-        {
-            Debug.Log("EnemyIsDead");
         }
     }
 

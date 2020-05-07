@@ -24,4 +24,9 @@ public class EnemyType : MonoBehaviour
                 break;
         }
     }
+
+    public void SetToThisIndex(int _identity)
+    {
+        properties.SetIndex(_identity);
+    }
 }

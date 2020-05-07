@@ -5,4 +5,10 @@ using UnityEngine;
 public class projectileBehaviorTypes : MonoBehaviour
 {
     public enum projectileBehavior { _TypeA, _TypeB, _TypeC, _TypeD, _TypeE };
+
+
+    void SetInverval(float inter)
+    { 
+        // Behaviours
+    }
 }

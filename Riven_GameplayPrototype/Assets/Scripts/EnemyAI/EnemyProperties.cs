@@ -33,6 +33,8 @@ public class EnemyProperties : ScriptableObject
     public float roamDistance_Min;
     public float roamDistance_Max;
     private Image healthBar;
+    private SpawnState spawnState;
+    private int identity;
 
     GameObject thisEnemy;
     Transform target;
@@ -40,14 +42,14 @@ public class EnemyProperties : ScriptableObject
     Vector3 startingPosition;
     Vector3 roamPosition;
 
-    public EnemyProperties(GameObject _thisObject, Vector3 _setStartingPosition)
+    /*public EnemyProperties(GameObject _thisObject, Vector3 _setStartingPosition)
     {
         //SetGameObjectOfSelf(_thisObject);
         InitializeProperties(_thisObject, _setStartingPosition);
         //SetStartingPosition(_setStartingPosition);
-    }
+    }*/
 
-    public void InitializeProperties (GameObject _thisObject, Vector3 _setStartingPosition)
+    public void InitializeProperties (GameObject _thisObject, Vector3 _setStartingPosition, SpawnState _setSpawnState, int _setIdentity)
     {
         SetGameObjectOfSelf(_thisObject);
 
@@ -70,6 +72,10 @@ public class EnemyProperties : ScriptableObject
         target = PlayerManager.instance.player.transform;
 
         InitializeGraphics();
+
+        spawnState = _setSpawnState;
+
+        SetIndex(_setIdentity);
     }
 
     private void InitializeGraphics()
@@ -140,18 +146,24 @@ public class EnemyProperties : ScriptableObject
 
     public void DoDamage(float _damage)
     {
+        Debug.Log("Doing damage to: " + identity);
         health -= _damage;
         healthBar.fillAmount = health / maxHealth;
+        IsDead();
     }
     
-    public bool IsDead ()
+    public void IsDead ()
     {
         if (health <= 0)
         {
-            GameObject.Destroy(thisEnemy);
-            return true;
+            Debug.Log("This enemy's id: " + identity);
+            spawnState.EnemyDead(identity);
         }
-        else return false;
+    }
+
+    public void SetIndex(int _setIndex)
+    {
+        identity = _setIndex;
     }
 
 }
