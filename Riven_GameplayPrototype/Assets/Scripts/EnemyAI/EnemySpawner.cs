@@ -13,7 +13,6 @@ public class EnemySpawner : MonoBehaviour
     public GameObject[] enemyPrefabs;
     public GameObject[] enemiesSpawned;
     public EnemyProperties[] enemyProperties;
-    public int enemySpawnIndex;
     public List<GameObject> spawnedEnemies;
     public GameObject[] Floors;
     public GameObject CurrentFloor;
@@ -24,7 +23,7 @@ public class EnemySpawner : MonoBehaviour
 
     public int maxEnemies = 0;
     public int minimumEnemies = 6;
-    public int enemyMultiplier = 4;
+    public float enemyMultiplier = 4;
 
     public float globalTimer = 0f;
     public float globalTicker = 60f;
@@ -33,23 +32,12 @@ public class EnemySpawner : MonoBehaviour
     public float spawnTicker = 5f;
     public float _tMultiplier = 0f;
 
-    public void RemoveEnemyByIdentity(int _index)
+    public void RemoveEnemyByIdentity(GameObject enemy)
     {
-        GameObject RemoveEnemy = spawnedEnemies[_index];
-        Debug.Log("Removing Enemy, spawn Index: " + enemySpawnIndex);
-        
+        Debug.Log("How many enemies in list of enemies " + spawnedEnemies.Count);
 
-        spawnedEnemies.RemoveAt(_index);
-
-        enemySpawnIndex--;
-        for (int i = _index; i < enemySpawnIndex; i++)
-        {
-            Debug.Log("i is equal to: " + i);
-            int o = i;
-            spawnedEnemies[i].GetComponent<EnemyType>().SetToThisIndex(o--);
-        }
-        Debug.Log("Removed Enemy, spawn index is now: " + enemySpawnIndex);
-        GameObject.Destroy(RemoveEnemy);
+        spawnedEnemies.RemoveAt(spawnedEnemies.IndexOf(enemy));
+        GameObject.Destroy(enemy);
     }
 
     bool CheckToSpawnEnemies()
@@ -58,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
         {
             _tMultiplier = globalTicker;
         }*/
-        _tMultiplier = globalTimer / globalTicker;
+        /*_tMultiplier = globalTimer / globalTicker;
         if (_tMultiplier < 1f)
         {
 
@@ -75,23 +63,20 @@ public class EnemySpawner : MonoBehaviour
                     return true;
                 }
             }
-        }
-        else
-        {
-            if (enemySpawnIndex + 1 < maxEnemies + maxEnemies )
-            {
-                //Debug.Log("Show Multiplier value: " + (maxEnemies + maxEnemies * _tMultiplier));
-                spawnTimer += Time.deltaTime;
+        }*/
 
-                if (spawnTimer >= spawnTicker)
-                {
-                    spawnTimer = 0f;
-                    //Debug.Log("Definitely spawn a new enemy");
-                    return true;
-                }
+        if (spawnedEnemies.Count < minimumEnemies)
+        {
+            spawnTimer += Time.deltaTime;
+
+            if (spawnTimer > spawnTicker)
+            {
+                spawnTimer = 0f;
+                //Debug.Log("Definitely spawn a new enemy");
+                return true;
             }
         }
-
+        
         return false;
     }
 
@@ -107,15 +92,24 @@ public class EnemySpawner : MonoBehaviour
         {
             if (enemyProperties[p].name == "TestEnemy")
             {
+                
+                int i = spawnedEnemies.Count;
+
                 spawnedEnemies.Add((GameObject)Instantiate(enemyPrefabs[p], spawnArea.GetThisAgent(), Quaternion.identity));
-                spawnedEnemies[enemySpawnIndex].GetComponent<EnemyTestAI>().InitializeEnemy(enemyProperties[p], spawnArea.GetThisAgent(), spawnState, enemySpawnIndex);
-                enemySpawnIndex++;
-                //Debug.Log("Spawn Idex: " + enemySpawnIndex);
+                
+
+                spawnedEnemies[i].GetComponent<EnemyTestAI>().InitializeEnemy(enemyProperties[p], spawnArea.GetThisAgent(), spawnState, i);
+                
+                //Debug.Log("Spawn Index: " + enemySpawnIndex);
+                
             }
         }
 
         GameObject.Destroy(spawnArea._ThisAgentReference);
     }
+
+
+
 
     void SetFloor ()
     {
@@ -128,10 +122,9 @@ public class EnemySpawner : MonoBehaviour
 
     void InitializeFloor()
     {
-        enemySpawnIndex = 0;
         FloorID = 0;
         CurrentFloor = Floors[FloorID];
-        maxEnemies = minimumEnemies + enemyMultiplier * FloorID;
+        //maxEnemies = minimumEnemies + enemyMultiplier * FloorID;
         spawnArea = CurrentFloor.GetComponent<FloorProperties>().GetSpawnArea();
 
         _tMultiplier = 0f;
@@ -150,7 +143,6 @@ public class EnemySpawner : MonoBehaviour
                 {
                     //enemiesSpawned[l].GetComponent<EnemyTestAI>().InitializeEnemy(enemyProperties[p], new Vector3(0, 0, 0));
                     Debug.Log("This is a test enemy");
-
                 }
             }
 
@@ -209,4 +201,6 @@ public class EnemySpawner : MonoBehaviour
                 }
         }
     }
+
+
 }

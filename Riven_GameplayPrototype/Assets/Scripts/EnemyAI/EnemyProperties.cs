@@ -34,7 +34,8 @@ public class EnemyProperties : ScriptableObject
     public float roamDistance_Max;
     private Image healthBar;
     private SpawnState spawnState;
-    private int identity;
+    public int identity;
+    private bool isDead = false;
 
     GameObject thisEnemy;
     Transform target;
@@ -66,7 +67,7 @@ public class EnemyProperties : ScriptableObject
             agentController.stoppingDistance = stoppingDistance;
         }
 
-            startingPosition = thisEnemy.transform.position;
+        //startingPosition = thisEnemy.transform.position;
         GetRoamingPosition();
         floorProperties = GameObject.Find("GameManager").GetComponent<floorManager>();
         target = PlayerManager.instance.player.transform;
@@ -146,18 +147,22 @@ public class EnemyProperties : ScriptableObject
 
     public void DoDamage(float _damage)
     {
-        Debug.Log("Doing damage to: " + identity);
+        //Debug.Log("Doing damage to: " + identity);
         health -= _damage;
         healthBar.fillAmount = health / maxHealth;
-        IsDead();
-    }
-    
-    public void IsDead ()
-    {
-        if (health <= 0)
+        if (isDead)
         {
-            Debug.Log("This enemy's id: " + identity);
-            spawnState.EnemyDead(identity);
+            Debug.Log("If enemy is dead pass through this debug.log");
+        }
+
+        // Check if enemy is dead
+        if (health <= 0 && !isDead)
+        {
+            isDead = true;
+
+            Debug.Log("Setting enemy to dead passing object into spawnstate script which is a member of enemy spawner");
+            spawnState.EnemyDead(thisEnemy);
+
         }
     }
 
@@ -166,4 +171,8 @@ public class EnemyProperties : ScriptableObject
         identity = _setIndex;
     }
 
+    public bool IsDead()
+    {
+        return isDead;
+    }
 }

@@ -19,13 +19,14 @@ MonoBehaviour:
   name: TestEnemy
   description: This is a test enemy
   damage: 2.19
-  maxHealth: 50
+  maxHealth: 100
   score: 0.99
   projectileInterval: 1.03
   movementSpeed: 4.87
   damageScaleModifier: 0.83
   attackRadius: 4.92
-  lookRadius: 8.28
-  stoppingDistance: 2.04
+  lookRadius: 13.7
+  stoppingDistance: 3.21
   roamDistance_Min: 4.48
   roamDistance_Max: 5.28
+  identity: 0

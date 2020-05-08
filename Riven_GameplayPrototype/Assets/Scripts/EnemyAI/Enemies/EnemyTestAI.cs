@@ -30,7 +30,7 @@ public class EnemyTestAI : MonoBehaviour
 
 
         properties = ScriptableObject.Instantiate<EnemyProperties>(_Properties);
-        properties.SetGameObjectOfSelf(gameObject);
+
         properties.InitializeProperties(gameObject, gameObject.transform.position, _setSpawnState, _setIdentity);
 
         enemyType.properties = properties;

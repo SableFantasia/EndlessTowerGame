@@ -554,17 +554,16 @@ MonoBehaviour:
   enemiesSpawned: []
   enemyProperties:
   - {fileID: 11400000, guid: d328519d5ac464947930680064732fc9, type: 2}
-  enemySpawnIndex: 0
   spawnedEnemies: []
   Floors:
   - {fileID: 5395462}
   CurrentFloor: {fileID: 0}
   spawnArea: {fileID: 0}
-  maxEnemies: 0
-  minimumEnemies: 6
-  enemyMultiplier: 4
+  maxEnemies: 4
+  minimumEnemies: 4
+  enemyMultiplier: 0
   globalTimer: 0
-  globalTicker: 60
+  globalTicker: 5000000
   spawnTimer: 0
   spawnTicker: 1
   _tMultiplier: 0
@@ -580,7 +579,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7d66fbe4c3d8684f86d369f11430c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemySpawner: {fileID: 1654261164}
 --- !u!1 &1871845382
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,6 +853,16 @@ PrefabInstance:
         type: 3}
       propertyPath: shootingHeight
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529698006793658679, guid: 8264cb4b96c71ff4eaebcb7483078a3f,
+        type: 3}
+      propertyPath: fireRate
+      value: 27.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3529698006793658679, guid: 8264cb4b96c71ff4eaebcb7483078a3f,
+        type: 3}
+      propertyPath: bulletForce
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3529698007009345639, guid: 8264cb4b96c71ff4eaebcb7483078a3f,
         type: 3}

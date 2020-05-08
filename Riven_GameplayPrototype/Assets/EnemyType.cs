@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class EnemyType : MonoBehaviour
 {
+    GameObject thisEnemyObject;
+
     public EnemyProperties properties;
 
     EnemyTypes enemyType;
     enum EnemyTypes { _TestEnemy, _AnotherEnemy };
+
+
+    private void Start()
+    {
+        thisEnemyObject = gameObject;
+    }
 
     public EnemyProperties GetEnemyProperties ()
     {
@@ -25,8 +33,15 @@ public class EnemyType : MonoBehaviour
         }
     }
 
-    public void SetToThisIndex(int _identity)
+    
+
+    public void SetIdentity(int _identity)
     {
         properties.SetIndex(_identity);
+    }
+
+    public int GetEnemyIdentity()
+    {
+        return properties.identity;
     }
 }
