@@ -470,6 +470,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5339983559588390198, guid: 8264cb4b96c71ff4eaebcb7483078a3f,
+        type: 3}
+      propertyPath: bulletForce
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339983559588390198, guid: 8264cb4b96c71ff4eaebcb7483078a3f,
+        type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
+    - target: {fileID: 5339983559588390198, guid: 8264cb4b96c71ff4eaebcb7483078a3f,
+        type: 3}
+      propertyPath: shootingHeight
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8264cb4b96c71ff4eaebcb7483078a3f, type: 3}
 --- !u!1 &203381646

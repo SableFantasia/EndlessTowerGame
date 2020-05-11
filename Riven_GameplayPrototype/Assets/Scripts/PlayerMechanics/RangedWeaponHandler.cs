@@ -36,7 +36,7 @@ public class RangedWeaponHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        weaponEquipped = WeaponType.Pistol;
+        weaponEquipped = WeaponType.Nothing;
 
         playerStates = GetComponent<PlayerStates>();
 
@@ -57,7 +57,7 @@ public class RangedWeaponHandler : MonoBehaviour
             }
             case WeaponType.Bow:
             {
-                    bow.ShootBow();
+                    bow.BowBehaviour();
                 break;
             }
         }
