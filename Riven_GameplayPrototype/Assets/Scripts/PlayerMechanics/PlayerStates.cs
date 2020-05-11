@@ -11,7 +11,8 @@ public enum PlayerState {
 
     Movement = 1,
     Shooting = 2,
-    Melee = 4
+    comboShooting = 4,
+    Melee = 8
 
 }
 
@@ -63,6 +64,13 @@ public class PlayerStates : MonoBehaviour {
             case PlayerState.BasicPlayerState:
                 {
                     PlayerMechanics();
+                    break;
+                }
+
+            case PlayerState.comboShooting:
+                {
+
+
                     break;
                 }
         }
