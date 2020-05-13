@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour {
 
         bool Left, Right, Up, Down;
 
-        if(playerStates.currentState == PlayerState.Movement && playerStates.currentState != PlayerState.Shooting)
+        if(playerStates.currentBasicPlayerState == PlayerState.Movement)
         {
 
             //Left
