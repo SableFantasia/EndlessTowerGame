@@ -16,8 +16,9 @@ MonoBehaviour:
   elementalType: 0
   isAttacking: 0
   checkState: 0
-  name: TestEnemy
-  description: This is a test enemy
+  EnemyType: 1
+  name: This is a hot enemy
+  description: 
   damage: 2.19
   maxHealth: 100
   score: 0.99

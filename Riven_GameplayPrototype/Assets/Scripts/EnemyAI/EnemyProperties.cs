@@ -17,7 +17,7 @@ public class EnemyProperties : ScriptableObject
     public DamageType elementalType;
     public IsAttacking isAttacking;
     public CheckState checkState;
-    //public string enemyName;
+    public EnemyType.EnemyTypes EnemyType;
     public new string name;
     public string description;
     public float damage;
@@ -174,5 +174,10 @@ public class EnemyProperties : ScriptableObject
     public bool IsDead()
     {
         return isDead;
+    }
+
+    public EnemyType.EnemyTypes GetEnemyType()
+    {
+        return EnemyType;
     }
 }
