@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de96fca9ea96f25498590483f83146fa, type: 3}
+  m_Name: TheDumbestWaveYet
+  m_EditorClassIdentifier: 
+  waveType: 2
+  frequency: 0
+  CheckIfRandom: 0
+  NoOfEnemiesToSpawn: 0
+  setEnemyFrequency: 1
+  randomEnemyTypes: 010000000200000002000000
+  RandomRange: 030000000300000004000000
+  NoOfEach: 
+  CheckIfSpecific: 0
+  specificEnemyOrder: 01000000010000000100000001000000010000000200000002000000020000000200000002000000020000000200000002000000
+  CheckIfVariable: 1
+  setVariable: 010000000200000000000000
+  VariableQuantity: 050000000500000008000000

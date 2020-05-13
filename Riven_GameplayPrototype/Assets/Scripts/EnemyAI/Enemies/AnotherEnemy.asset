@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 761ae126e3952b94c9dc62b7a2bedd35, type: 3}
+  m_Name: AnotherEnemy
+  m_EditorClassIdentifier: 
+  enemyBehavior: 
+  elementalType: 0
+  isAttacking: 0
+  checkState: 0
+  EnemyType: 2
+  name: Another Enemy
+  description: This is a cool enemy
+  damage: 20
+  maxHealth: 40
+  score: 1
+  projectileInterval: 4
+  movementSpeed: 25
+  damageScaleModifier: 0
+  attackRadius: 10
+  lookRadius: 10
+  stoppingDistance: 5
+  roamDistance_Min: 5
+  roamDistance_Max: 10
+  identity: 0
