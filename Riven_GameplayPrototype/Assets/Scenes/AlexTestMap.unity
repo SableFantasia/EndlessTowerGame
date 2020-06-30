@@ -1520,7 +1520,7 @@ PrefabInstance:
     - target: {fileID: 5279395311389753135, guid: cdc91f8ab2a2b694aa3d31d0759ccd36,
         type: 3}
       propertyPath: crystalTypes
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cdc91f8ab2a2b694aa3d31d0759ccd36, type: 3}
@@ -1534,7 +1534,7 @@ PrefabInstance:
     - target: {fileID: 134914442478512371, guid: aa9b6c0974360b04a8f694cdde106652,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.868
+      value: -1.85
       objectReference: {fileID: 0}
     - target: {fileID: 134914442478512371, guid: aa9b6c0974360b04a8f694cdde106652,
         type: 3}

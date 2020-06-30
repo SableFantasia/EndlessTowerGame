@@ -10,7 +10,7 @@ public class Equipment : MonoBehaviour
     public enum ArmourPiece { Head, Chest, Legs, Feet, Hands, Necklace }
     public ArmourPiece typeOfEquipment;
 
-    public enum elemental { Fire, Earth, Water, Air, Light, Dark }
+    public enum elemental { none, Fire, Earth, Water, Air, Light, Dark }
     elemental elementalResistance;
     elemental propertyModifier;
 
@@ -24,14 +24,11 @@ public class Equipment : MonoBehaviour
     void Start()
     {
         int randInt = UnityEngine.Random.Range(0, 6);
+        Debug.Log("Armour: " + randInt);
+
+        int randInt2 = UnityEngine.Random.Range(0, 7);
+        Debug.Log("Element: " + randInt2);
         //value = Mathf.RoundToInt(cost * sellMultiplier);
-    }
-
-    void OnMouseDown()
-    {
-        int randInt = UnityEngine.Random.Range(0, 6);
-
-        OnEquip(0);
     }
 
     void OnEquip(int armour)
